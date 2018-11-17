@@ -5,9 +5,10 @@
 
 class loadBalancer{
 private:
-    
+    std::string commandLine;    
 public:
-    std::string getInput();
+    void getInput();
+    bool parseInput();
 };
 
 #endif

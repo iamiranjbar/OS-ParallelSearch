@@ -1,7 +1,11 @@
 #include "loadBalancer.hpp"
 
-std::string loadBalancer::getInput(){
-    std::string s;
-    std::cin >> s; 
-    return s;
+void loadBalancer::getInput(){
+    getline(std::cin, commandLine);
+}
+
+bool loadBalancer::parseInput(){
+    if (commandLine == "quit")
+        return 0;
+    return 1;
 }
