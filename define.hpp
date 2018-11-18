@@ -4,4 +4,6 @@
 #define ASCEND "ascend"
 #define DECSEND "descend"
 
+#define WORKER "worker"
+
 #endif

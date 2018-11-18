@@ -1,6 +1,7 @@
-all: parSearch
+all: parSearch 
+		make worker
 		make clean
-	
+
 parSearch: main.o loadBalancer.o tools.o
 
 		g++ main.o loadBalancer.o tools.o -o parSearch
@@ -16,6 +17,10 @@ loadBalancer.o: loadBalancer.cpp
 tools.o: tools.cpp
 
 		g++ -c tools.cpp
+
+worker: workerMain.cpp
+
+		g++ workerMain.cpp -o worker
 
 clean: 
 

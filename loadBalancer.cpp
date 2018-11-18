@@ -72,8 +72,9 @@ void loadBalancer::devideFilesAndCreateWorkers(){
             close(p[i][1]);
             char msg[1000]; 
             read(p[i][0], msg, 1000); 
-            // std:: cout << msg << std::endl;
             close(p[i][0]);
+            char* argv[3] = {WORKER,msg,NULL};
+            std::cout << execv("/Users/amir/Desktop/OS-ParallelSearch/worker", argv) << std::endl;
             exit(0);
         }
         else if(pid > 0){
