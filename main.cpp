@@ -9,6 +9,9 @@ int main(int argc, char const *argv[]){
         lb.getInput();
         if (!lb.parseInput())
             break;
+        lb.getFiles();
+        lb.devideFilesAndCreateWorkers();
+        // lb.clear();
     }
     return 0;
 }

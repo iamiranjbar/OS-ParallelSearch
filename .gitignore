@@ -34,3 +34,10 @@ parSearch
 
 #VS Code files 
 .vscode/
+
+# Temp files 
+temp.cpp
+test/
+
+# Mac files
+.DS_Store

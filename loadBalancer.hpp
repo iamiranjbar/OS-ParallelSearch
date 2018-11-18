@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <dirent.h>
+#include <unistd.h>
 
 #include "tools.hpp"
 #include "define.hpp"
@@ -14,12 +16,19 @@ private:
     std::vector<std::string> commandParts;
     std::map <std::string,std::string> filters;
     std::map <std::string,std::string> sorting;
-    int prc_cnt;
-    std::string dir_name;
+    std::string filterString;
+    std::string sortingString;
+    int prcCnt;
+    std::string dirPath;
+    std::vector<std::string> dirFiles;
+    std::vector<int> workerNumFiles;
 public:
     void getInput();
     bool parseInput();
     void setFields();
+    void getFiles();
+    void devideFilesAndCreateWorkers();
+    void clear();
 };
 
 #endif
