@@ -1,9 +1,9 @@
 all: parSearch
 		make clean
 	
-parSearch: main.o loadBalancer.o
+parSearch: main.o loadBalancer.o tools.o
 
-		g++ main.o loadBalancer.o -o parSearch
+		g++ main.o loadBalancer.o tools.o -o parSearch
 
 main.o: main.cpp 
 
@@ -12,6 +12,10 @@ main.o: main.cpp
 loadBalancer.o: loadBalancer.cpp
 
 		g++ -c loadBalancer.cpp 
+
+tools.o: tools.cpp
+
+		g++ -c tools.cpp
 
 clean: 
 
