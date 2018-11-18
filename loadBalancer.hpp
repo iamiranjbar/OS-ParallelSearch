@@ -6,6 +6,7 @@
 #include <map>
 
 #include "tools.hpp"
+#include "define.hpp"
 
 class loadBalancer{
 private:
