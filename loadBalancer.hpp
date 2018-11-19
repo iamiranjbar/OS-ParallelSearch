@@ -32,6 +32,7 @@ public:
     void devideFilesAndCreateWorkers();
     void createPresenter();
     void clear();
+    int getProcCount(){return prcCnt;}
 };
 
 #endif

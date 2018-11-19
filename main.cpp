@@ -13,6 +13,10 @@ int main(int argc, char const *argv[]){
         lb.getFiles();
         lb.devideFilesAndCreateWorkers();
         lb.createPresenter();
+        int prcCnt = lb.getProcCount();
+        for (int i = 0; i < prcCnt+1; i++){
+            wait(NULL);
+        }
         // lb.clear();
     }
     return 0;

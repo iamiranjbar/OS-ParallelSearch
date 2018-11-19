@@ -90,8 +90,6 @@ void loadBalancer::devideFilesAndCreateWorkers(){
             }
             write(p[i][1], data.c_str() , (data.length())+1);
             close(p[i][1]);
-            // wait(NULL);
-            // std::cout << "***********" << std::endl;
         }
     }
 }
