@@ -28,6 +28,13 @@ void presenter::getDataFromWorkers(){
         }
         std::map <std::string,std::string> ::iterator it = sorting.begin();
         sortResult(resTable,it->first,it->second);
+        mergeResult(resTable,it->first,it->second);
+        // for (int i =0; i< finalResult.size(); i++){
+        //     for (int j =0; j < finalResult[i].size(); j++){
+        //         std::cout/* << getpid()<< ": "*/<< finalResult[i][j] << " ";
+        //     }
+        //     std::cout<<std::endl;
+        // }
     }
     fd.close();
 }
@@ -81,4 +88,73 @@ void presenter::sortResult(std::vector<std::vector<std::string> > &res, std::str
             }
         }
     }
+}
+
+void presenter::mergeResult(std::vector<std::vector<std::string> > data,std::string sortBy,
+    std::string type){
+    int header;
+    for (int i =0; i < data[0].size(); i++){
+        if (data[0][i] == sortBy){
+            header = i;
+            break;
+        }
+    }
+    int firstSize = finalResult.size();
+    int secondSize = data.size();
+    int firstPtr = 1, secondPtr = 1;
+    std::vector<std::vector<std::string> > temp;
+    temp.push_back(data[0]);
+    while(firstPtr != firstSize || secondPtr != secondSize){
+        if (firstSize == 0){
+            temp = data;
+            break;
+        }
+        if(secondSize == 0){
+            temp = finalResult;
+            break;
+        }
+        if (!Tools::isNumber(data[1][header])){
+            if (firstPtr == firstSize){
+                temp.push_back(data[secondPtr]);
+                secondPtr++;
+            }
+            else if (secondPtr == secondSize || secondSize == 0){
+                temp.push_back(finalResult[firstPtr]);
+                firstPtr++;
+            }
+            else{
+                if(((finalResult[firstPtr][header] > data[secondPtr][header]) && type == ASCEND) ||
+                    ((finalResult[firstPtr][header] < data[secondPtr][header]) && type == DECSEND)){
+                    temp.push_back(data[secondPtr]);
+                    secondPtr++;
+                }
+                else{
+                    temp.push_back(finalResult[firstPtr]);
+                    firstPtr++;
+                }
+            }
+        }
+        else{
+            if (firstPtr == firstSize){
+                temp.push_back(data[secondPtr]);
+                secondPtr++;
+            }
+            else if (secondPtr == secondSize){
+                temp.push_back(finalResult[firstPtr]);
+                firstPtr++;
+            }
+            else{
+                if(((stoi(finalResult[firstPtr][header]) > stoi(data[secondPtr][header])) && type == ASCEND) ||
+                    ((stoi(finalResult[firstPtr][header]) < stoi(data[secondPtr][header])) && type == DECSEND)){
+                    temp.push_back(data[secondPtr]);
+                    secondPtr++;
+                }
+                else{
+                    temp.push_back(finalResult[firstPtr]);
+                    firstPtr++;
+                }
+            }
+        }
+    }
+    finalResult = temp;
 }

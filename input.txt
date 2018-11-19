@@ -1,2 +1,2 @@
-brand = asus - model = nx - price = ascend - prc_cnt = 4 - dir = laptops
+brand = asus - model = nx - price = descend - prc_cnt = 4 - dir = laptops
 quit
