@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]){
         for (int i = 0; i < prcCnt+1; i++){
             wait(NULL);
         }
-        // lb.clear();
+        lb.clear();
     }
     return 0;
 }

@@ -114,10 +114,10 @@ void loadBalancer::createPresenter(){
 }
 
 void loadBalancer::clear(){
-    this-> commandLine = nullptr;
+    this-> commandLine = "";
     this-> commandParts.clear();
     this-> prcCnt = 0;
-    this-> dirPath = nullptr;
+    this-> dirPath = "";
     this-> dirFiles.clear();
     this->workerNumFiles.clear();
 }
