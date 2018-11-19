@@ -158,3 +158,12 @@ void presenter::mergeResult(std::vector<std::vector<std::string> > data,std::str
     }
     finalResult = temp;
 }
+
+void presenter::showResult(){
+    for (int i =0; i< finalResult.size(); i++){
+        for (int j =0; j < finalResult[i].size(); j++){
+            std::cout<< finalResult[i][j] << " ";
+        }
+        std::cout<<std::endl;
+    }
+}

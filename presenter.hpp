@@ -24,7 +24,7 @@ public:
         std::string type);
     void mergeResult(std::vector<std::vector<std::string> > data,std::string sortBy,
     std::string type);
-    // void showResult();
+    void showResult();
 };
 
 #endif
