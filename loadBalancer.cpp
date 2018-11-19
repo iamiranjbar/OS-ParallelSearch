@@ -24,7 +24,6 @@ void loadBalancer::setFields(){
             sortingString += " ";
         }
         else{
-            // filters[commandParts[i]] = commandParts[i+1];
             filterString += commandParts[i];
             filterString += " ";
             filterString += commandParts[i+1];
@@ -74,7 +73,7 @@ void loadBalancer::devideFilesAndCreateWorkers(){
             read(p[i][0], msg, 1000); 
             close(p[i][0]);
             char* argv[3] = {WORKER,msg,NULL};
-            std::cout << execv("/Users/amir/Desktop/OS-ParallelSearch/worker", argv) << std::endl;
+            execv("/Users/amir/Desktop/OS-ParallelSearch/worker", argv);
             exit(0);
         }
         else if(pid > 0){
@@ -82,21 +81,21 @@ void loadBalancer::devideFilesAndCreateWorkers(){
             std::string data;
             data = filterString + " @ ";
             for (int j = 0; j < workerNumFiles[i]; j++){
-                data = data + dirFiles[k];
+                data = data + dirPath + "/" + dirFiles[k];
                 data = data + " ";
                 k++;
             }
             write(p[i][1], data.c_str() , (data.length())+1);
             close(p[i][1]);
+            wait(NULL);
+            std::cout << "***********" << std::endl;
         }
     }
 }
-
+    
 void loadBalancer::clear(){
     this-> commandLine = nullptr;
     this-> commandParts.clear();
-    this-> filters.clear();
-    this-> sorting.clear();
     this-> prcCnt = 0;
     this-> dirPath = nullptr;
     this-> dirFiles.clear();

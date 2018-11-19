@@ -2,6 +2,25 @@
 
 using namespace std;
 
+vector<string> Tools::splitBySpace(string statement){
+    vector<string> result;
+    string token;
+    for(int i=0; i<statement.length(); i++){
+        if(statement[i] != ' ')
+            token += statement[i];
+        else{
+            if(token.length()) {
+                result.push_back(token);
+                token = "";
+            }
+        }
+    }
+    if (token != ""){
+        result.push_back(token);
+    }
+    return result;
+}
+
 vector<string> Tools::split(string statement , const char* delimeters){
     vector<string> result;
     string token;
@@ -25,4 +44,12 @@ vector<string> Tools::split(string statement , const char* delimeters){
         result.push_back(token);
     }
     return result;
+}
+
+int Tools::findCharIndex(std::string s, char c){
+    for (int i = 0; i < s.length(); i++){
+        if (s[i] == c)
+            return i;
+    }
+    return -1;
 }

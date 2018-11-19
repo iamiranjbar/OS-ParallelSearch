@@ -6,7 +6,9 @@
 
 class Tools{
 public:
+	static std::vector<std::string> splitBySpace(std::string statement);
 	static std::vector<std::string> split(std::string statement , const char* delimeters);
+	static int findCharIndex(std::string s, char c);
 private:
 	Tools();
 };

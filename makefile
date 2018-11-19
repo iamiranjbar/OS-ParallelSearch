@@ -18,9 +18,17 @@ tools.o: tools.cpp
 
 		g++ -c tools.cpp
 
-worker: workerMain.cpp
+worker: workerMain.o worker.o tools.o
 
-		g++ workerMain.cpp -o worker
+		g++ workerMain.o worker.o tools.o -o worker
+
+workerMain.o: workerMain.cpp
+
+		g++ -c workerMain.cpp
+
+worker.o: worker.cpp
+
+		g++ -c worker.cpp
 
 clean: 
 

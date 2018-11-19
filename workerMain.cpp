@@ -1,9 +1,13 @@
 #include <iostream>
+#include <unistd.h>
+#include "worker.hpp"
 
 using namespace std;
 
 int main(int argc, char const *argv[]){
-    for (int i = 0; i < argc; i++)
-        cout << argv[i] << endl;
+    worker w;
+    w.setFields(argv[1]);
+    w.processFiles();
+    w.search();
     return 0;
 }

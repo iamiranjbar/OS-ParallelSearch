@@ -14,8 +14,6 @@ class loadBalancer{
 private:
     std::string commandLine;
     std::vector<std::string> commandParts;
-    std::map <std::string,std::string> filters;
-    std::map <std::string,std::string> sorting;
     std::string filterString;
     std::string sortingString;
     int prcCnt;
