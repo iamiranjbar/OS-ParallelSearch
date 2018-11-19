@@ -9,5 +9,6 @@ int main(int argc, char const *argv[]){
     w.setFields(argv[1]);
     w.processFiles();
     w.search();
+    w.makeDataReady();
     return 0;
 }

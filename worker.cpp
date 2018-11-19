@@ -44,9 +44,7 @@ void worker::processFiles(){
 void worker::search(){
     int header;
     for(std::map <std::string,std::string> ::iterator it = filters.begin(); it != filters.end(); ++it) {
-        // std::cout << it -> first << std::endl;
         for (int i =0; i < searchTable[0].size(); i++){
-            // std::cout << "=======>" <<searchTable[0][i] << std::endl; 
             if (searchTable[0][i] == it -> first){
                 header = i;
                 break;
@@ -57,10 +55,14 @@ void worker::search(){
                 searchTable.erase(searchTable.begin()+i);
         }
     }
-    // for (int i =1; i< searchTable.size(); i++){
-    //     for (int j =0; j < searchTable[i].size(); j++){
-    //         std::cout<< searchTable[i][j] << " ";
-    //     }
-    //     std::cout<<std::endl;
-    // }
+}
+
+void worker::makeDataReady(){
+    for (int i =1; i< searchTable.size(); i++){
+        for (int j =0; j < searchTable[i].size(); j++){
+            dataForPresenter += searchTable[i][j] += " ";
+        }
+        dataForPresenter += " @ ";
+    }
+    dataForPresenter += "#";
 }

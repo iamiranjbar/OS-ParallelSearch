@@ -34,6 +34,10 @@ void loadBalancer::setFields(){
     dirPath = "./" + commandParts[lastElement];
 }
 
+void loadBalancer::createNamedPipe(){
+    mkfifo(NAMEDPIPE,0666);
+}
+
 void loadBalancer::getFiles(){
     DIR *dir;
     struct dirent *ent;
@@ -74,7 +78,6 @@ void loadBalancer::devideFilesAndCreateWorkers(){
             close(p[i][0]);
             char* argv[3] = {WORKER,msg,NULL};
             execv("/Users/amir/Desktop/OS-ParallelSearch/worker", argv);
-            exit(0);
         }
         else if(pid > 0){
             close(p[i][0]);
@@ -88,11 +91,30 @@ void loadBalancer::devideFilesAndCreateWorkers(){
             write(p[i][1], data.c_str() , (data.length())+1);
             close(p[i][1]);
             wait(NULL);
-            std::cout << "***********" << std::endl;
+            // std::cout << "***********" << std::endl;
         }
     }
 }
     
+void loadBalancer::createPresenter(){
+    int pid = fork();
+    if(pid == 0){
+        std::ifstream fd;
+        fd.open(NAMEDPIPE, std::fstream::in);
+        std::string configLine;
+        getline(fd,configLine);
+        fd.close();
+        execl("/Users/amir/Desktop/OS-ParallelSearch/presenter", PRESENTER, configLine.c_str(), NULL);
+    }
+    else if (pid > 0){
+        int fd = open(NAMEDPIPE, O_WRONLY);
+        std::string prcCntStr = std::to_string(prcCnt);
+        std::string data = sortingString + "@" + prcCntStr + "\n";
+        write(fd,data.c_str(),(data.length())+1);
+        close(fd);
+    }
+}
+
 void loadBalancer::clear(){
     this-> commandLine = nullptr;
     this-> commandParts.clear();

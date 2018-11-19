@@ -6,6 +6,9 @@
 #include <map>
 #include <dirent.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <fstream>
 
 #include "tools.hpp"
 #include "define.hpp"
@@ -24,8 +27,10 @@ public:
     void getInput();
     bool parseInput();
     void setFields();
+    void createNamedPipe();
     void getFiles();
     void devideFilesAndCreateWorkers();
+    void createPresenter();
     void clear();
 };
 

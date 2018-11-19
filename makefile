@@ -1,5 +1,6 @@
 all: parSearch 
 		make worker
+		make presenter
 		make clean
 
 parSearch: main.o loadBalancer.o tools.o
@@ -30,6 +31,14 @@ worker.o: worker.cpp
 
 		g++ -c worker.cpp
 
+presenter: presenterMain.o
+
+		g++ presenterMain.o -o presenter
+
+presenterMain.o: presenterMain.cpp
+
+		g++  -c presenterMain.cpp
+		
 clean: 
 
 		rm *.o

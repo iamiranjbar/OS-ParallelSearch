@@ -5,5 +5,8 @@
 #define DECSEND "descend"
 
 #define WORKER "worker"
+#define PRESENTER "presenter"
+
+#define NAMEDPIPE "/tmp/myfifo"
 
 #endif

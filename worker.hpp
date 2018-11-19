@@ -14,12 +14,14 @@ private:
     std::map <std::string,std::string> filters;
     std::vector<std::string> files;
     std::vector<std::vector<std::string> > searchTable;
+    std::string dataForPresenter;
 public:
     void setFields(std::string data);
     void fillMaps(std::string filterString);
     void setFiles(std::string fileString);
     void processFiles();
     void search();
+    void makeDataReady();
 };
 
 #endif 
