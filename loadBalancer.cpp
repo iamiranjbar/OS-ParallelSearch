@@ -17,7 +17,6 @@ void loadBalancer::setFields(){
     int lastElement = commandParts.size() - 1;
     for (int i = 0; i < lastElement-3; i = i+2){
         if (commandParts[i+1] == ASCEND || commandParts[i+1] == DECSEND){
-            // sorting[commandParts[i]] = commandParts[i+1];
             sortingString += commandParts[i];
             sortingString += " ";
             sortingString += commandParts[i+1];
@@ -35,7 +34,8 @@ void loadBalancer::setFields(){
 }
 
 void loadBalancer::createNamedPipe(){
-    mkfifo(NAMEDPIPE,0666);
+    mkfifo(MAINNAMEDPIPE,0666);
+    mkfifo(WORKERSNAMEDPIPE,0666);
 }
 
 void loadBalancer::getFiles(){
@@ -90,7 +90,7 @@ void loadBalancer::devideFilesAndCreateWorkers(){
             }
             write(p[i][1], data.c_str() , (data.length())+1);
             close(p[i][1]);
-            wait(NULL);
+            // wait(NULL);
             // std::cout << "***********" << std::endl;
         }
     }
@@ -100,14 +100,14 @@ void loadBalancer::createPresenter(){
     int pid = fork();
     if(pid == 0){
         std::ifstream fd;
-        fd.open(NAMEDPIPE, std::fstream::in);
+        fd.open(MAINNAMEDPIPE, std::fstream::in);
         std::string configLine;
         getline(fd,configLine);
         fd.close();
         execl("/Users/amir/Desktop/OS-ParallelSearch/presenter", PRESENTER, configLine.c_str(), NULL);
     }
     else if (pid > 0){
-        int fd = open(NAMEDPIPE, O_WRONLY);
+        int fd = open(MAINNAMEDPIPE, O_WRONLY);
         std::string prcCntStr = std::to_string(prcCnt);
         std::string data = sortingString + "@" + prcCntStr + "\n";
         write(fd,data.c_str(),(data.length())+1);

@@ -10,5 +10,6 @@ int main(int argc, char const *argv[]){
     w.processFiles();
     w.search();
     w.makeDataReady();
+    w.sendDataToPresenter();
     return 0;
 }

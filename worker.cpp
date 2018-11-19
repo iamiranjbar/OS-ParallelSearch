@@ -4,11 +4,11 @@ void worker::setFields(std::string data){
     int index = Tools::findCharIndex(data, '@');
     std::string filters = data.substr(0, index);
     std::string files = data.substr(index+2);
-    fillMaps(filters);
+    fillMap(filters);
     setFiles(files);
 }
 
-void worker::fillMaps(std::string filterString){
+void worker::fillMap(std::string filterString){
     std::vector<std::string> filter;
     filter = Tools::splitBySpace(filterString);
     for (int i = 0; i < filter.size(); i = i+2)
@@ -58,11 +58,17 @@ void worker::search(){
 }
 
 void worker::makeDataReady(){
-    for (int i =1; i< searchTable.size(); i++){
+    for (int i =0; i< searchTable.size(); i++){
         for (int j =0; j < searchTable[i].size(); j++){
             dataForPresenter += searchTable[i][j] += " ";
         }
-        dataForPresenter += " @ ";
+        dataForPresenter += " @";
     }
-    dataForPresenter += "#";
+    dataForPresenter += "\n";
+}
+
+void worker::sendDataToPresenter(){
+    int fd = open(WORKERSNAMEDPIPE, O_WRONLY);
+    write(fd,dataForPresenter.c_str(),(dataForPresenter.length())+1);
+    close(fd);
 }

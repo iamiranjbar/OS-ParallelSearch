@@ -6,8 +6,11 @@
 #include <map>
 #include <fstream>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #include "tools.hpp"
+#include "define.hpp"
 
 class worker{
 private:
@@ -17,11 +20,12 @@ private:
     std::string dataForPresenter;
 public:
     void setFields(std::string data);
-    void fillMaps(std::string filterString);
+    void fillMap(std::string filterString);
     void setFiles(std::string fileString);
     void processFiles();
     void search();
     void makeDataReady();
+    void sendDataToPresenter();
 };
 
 #endif 

@@ -31,6 +31,8 @@
 *.out
 *.app
 parSearch
+worker
+presenter
 
 #VS Code files 
 .vscode/

@@ -31,14 +31,18 @@ worker.o: worker.cpp
 
 		g++ -c worker.cpp
 
-presenter: presenterMain.o
+presenter: presenterMain.o presenter.o tools.o
 
-		g++ presenterMain.o -o presenter
+		g++ presenterMain.o presenter.o tools.o -o presenter
 
 presenterMain.o: presenterMain.cpp
 
 		g++  -c presenterMain.cpp
-		
+
+presenter.o: presenter.cpp 
+
+		g++ -c presenter.cpp
+
 clean: 
 
 		rm *.o

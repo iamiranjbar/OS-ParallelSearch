@@ -7,6 +7,7 @@
 #define WORKER "worker"
 #define PRESENTER "presenter"
 
-#define NAMEDPIPE "/tmp/myfifo"
+#define MAINNAMEDPIPE "/tmp/mainfifo"
+#define WORKERSNAMEDPIPE "/tmp/workersfifo"
 
 #endif
